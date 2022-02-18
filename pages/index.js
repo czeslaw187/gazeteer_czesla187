@@ -1,9 +1,17 @@
-function Home() {
-  return ( 
-    <div className="w-full h-full text-3xl text-center bg-gradient-to-br from-orange-600 to-orange-200">
-      Initial
-    </div>
-   );
-}
+import React from "react";
+import dynamic from "next/dynamic";
 
-export default Home;
+export default function Home() {
+  console.log(process.env.MAPBOX_TOKEN, 'home')
+  const MapWithNoSSR = dynamic(() => import("../components/Map"), {
+    ssr: false
+  });
+
+  return (
+    <main>
+      <div id="map" className="w-screen h-screen">
+        <MapWithNoSSR />
+      </div>
+    </main>
+  );
+}
