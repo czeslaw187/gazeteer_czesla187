@@ -4,7 +4,6 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 
 const Map = () => {
-    console.log(process.env.NEXT_PUBLIC_MAPBOX_TOKEN, 'map jsx')
   return (
     <MapContainer
       center={[40.8054, -74.0241]}
