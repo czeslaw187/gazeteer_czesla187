@@ -6,7 +6,6 @@ import "leaflet-defaulticon-compatibility";
 
 function MyMap({latLng}) {
   const [mymap,setMymap] = useState(null)
-  console.log(mymap, 'map')
   return (
     <MapContainer
       center={latLng ? latLng : [30,20]}
