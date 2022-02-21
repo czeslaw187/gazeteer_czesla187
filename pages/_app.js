@@ -9,7 +9,7 @@ export const store = createStore(reducer, applyMiddleware(thunk))
 
 export default function MyApp({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }) {
   return (
     <Provider store={store}>
