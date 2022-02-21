@@ -6,7 +6,6 @@ function Home() {
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(position=>setCoordinates([position.coords.latitude,position.coords.longitude]))
   },[])
-  console.log(coordinates, 'index')
   const MapWithNoSSR = dynamic(() => import("../components/MyMap"), {
     ssr: false
   });
