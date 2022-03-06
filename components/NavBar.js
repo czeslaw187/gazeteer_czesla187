@@ -1,12 +1,21 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
+import * as actionCreator from '../lib/actions.js'
 
 function Navbar(props) {
     let listOfCountries = props.state ? props.state.countires : 'loading...'
-    console.log(listOfCountries, 'navbar')
     const [visible,setVisible] = useState(false)
+    const [currentCountry, setCurrentCountry] = useState(props.state?.mapData[0]?.data)
+    console.log(currentCountry, 'navbar')
+
+    useEffect(()=>{
+        if (currentCountry) {
+            props.loadPoly(currentCountry)
+        }
+    },[currentCountry])
+
     return ( 
-        <nav className="w-screen min-h-fit px-3 bg-gradient-to-tl from-green-500 to-emerald-100">
+        <nav className="w-screen min-h-fit max-h-44 overflow-auto sticky px-3 bg-gradient-to-tl from-green-500 to-emerald-100">
             <div className="flex flex-row justify-between h-full">
                 <a href="#" className="font-mono text-blue-800 text-3xl my-auto">MyMap</a>                
                 <button className='w-4/12 md:w-1/12 h-10 my-3 mr-4 border-2 border-slate-800 rounded-md p-1 hover:bg-green-600' onClick={()=>{setVisible(!visible)}}>Menu</button>
@@ -15,12 +24,9 @@ function Navbar(props) {
                 <ul className="w-full flex flex-col text-right text-xl">
                     {
                         props.state ? props.state.countries.map(el=>{
-                            return <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">{el}</a></li>
+                            return <li className='mr-10 mb-2 hover:text-indigo-600'><button onClick={(e)=>{setCurrentCountry(e.target.innerHTML)}}>{el}</button></li>
                         }) : null
                     }
-                    <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">first</a></li>
-                    <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">second</a></li>
-                    <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">third</a></li>
                 </ul>
             </div>
         </nav>
@@ -33,4 +39,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Navbar)
+function mapDispatchToProps(dispatch) {
+    return {
+        loadPoly: (country)=>{dispatch(actionCreator.getBorders(country))}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
