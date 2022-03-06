@@ -14,6 +14,7 @@ function Home(props) {
     navigator.geolocation.getCurrentPosition(position=>{
       setCoordinates([position.coords.latitude,position.coords.longitude]) 
     })
+    props.loadCountries()
   },[])
 
   useEffect(()=>{
@@ -27,6 +28,7 @@ function Home(props) {
       props.loadPoly(storeData[0].data)
     }
   },[storeData[0]])
+
   return (
     <main>
       <div id="map" className="w-screen h-screen">
@@ -45,7 +47,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     loadCoords: (coords)=>{dispatch(actionCreator.loadGeoJson(coords))},
-    loadPoly: (country)=>{dispatch(actionCreator.getBorders(country))}
+    loadPoly: (country)=>{dispatch(actionCreator.getBorders(country))},
+    loadCountries: ()=>{dispatch(actionCreator.getCountries())}
   }
 }
 

@@ -35,5 +35,3 @@ function MyMap({latLng, coords}) {
 };
 
 export default MyMap;
-
-// <Polygon positions={country.polygon[0].data} />
