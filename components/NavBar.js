@@ -1,6 +1,9 @@
 import {useState} from 'react'
+import {connect} from 'react-redux'
 
-function Navbar() {
+function Navbar(props) {
+    let listOfCountries = props.state ? props.state.countires : 'loading...'
+    console.log(listOfCountries, 'navbar')
     const [visible,setVisible] = useState(false)
     return ( 
         <nav className="w-screen min-h-fit px-3 bg-gradient-to-tl from-green-500 to-emerald-100">
@@ -10,6 +13,11 @@ function Navbar() {
             </div>
             <div className={visible ? "w-4/12 ml-auto my-auto h-auto animate-dropdown" : "w-4/12 ml-auto my-auto h-0"}>
                 <ul className="w-full flex flex-col text-right text-xl">
+                    {
+                        props.state ? props.state.countries.map(el=>{
+                            return <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">{el}</a></li>
+                        }) : null
+                    }
                     <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">first</a></li>
                     <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">second</a></li>
                     <li className='mr-10 mb-2 hover:text-indigo-600'><a href="#">third</a></li>
@@ -19,4 +27,10 @@ function Navbar() {
      );
 }
 
-export default Navbar
+function mapStateToProps(state) {
+    return {
+        state
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)
