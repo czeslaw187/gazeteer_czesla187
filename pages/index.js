@@ -28,7 +28,7 @@ function Home(props) {
       props.loadPoly(storeData[0].data)
     }
   },[storeData[0]])
-  console.log(props.state, 'index')
+  
   return (
     <main>
       <div id="map" className="w-screen h-screen">
