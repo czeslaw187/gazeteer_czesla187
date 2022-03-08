@@ -7,10 +7,10 @@ import "leaflet-defaulticon-compatibility";
 function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
   let country = coords ? coords.state : 'Loading...'
-  console.log(country, 'map')
+  console.log(country?.countryData.data?.latLng[0], 'map')
   return (
     <MapContainer
-      center={latLng ? latLng : [30,20]}
+      center={country?.countryData.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
       zoom={5}
       scrollWheelZoom={true}
       style={{ height: "100%", width: "100%" }}
@@ -22,7 +22,7 @@ function MyMap({latLng, coords}) {
       />    
       {country ? <GeoJSON data={country.polygon.data}/> : null}
       <Marker 
-      position={latLng ? latLng : [30,20]}
+      position={country?.countryData.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
       draggable={true}
       animate={true}
       >

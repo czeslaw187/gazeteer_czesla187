@@ -26,6 +26,7 @@ function Home(props) {
   useEffect(()=>{
     if (storeData) {
       props.loadPoly(storeData[0].data)
+      props.loadInfo(storeData[0].data)
     }
   },[storeData[0]])
   
@@ -48,7 +49,8 @@ function mapDispatchToProps(dispatch) {
   return {
     loadCoords: (coords)=>{dispatch(actionCreator.loadGeoJson(coords))},
     loadPoly: (country)=>{dispatch(actionCreator.getBorders(country))},
-    loadCountries: ()=>{dispatch(actionCreator.getCountries())}
+    loadCountries: ()=>{dispatch(actionCreator.getCountries())},
+    loadInfo: (country)=>{dispatch(actionCreator.getInfo(country))}
   }
 }
 

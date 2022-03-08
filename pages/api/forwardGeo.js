@@ -12,7 +12,7 @@ export default async function forwardGeo(req, res) {
         respObj.latLng = response.data[0].latlng
         respObj.population = response.data[0].population
         respObj.flag = response.data[0].flags.png
-        respObj.capitalInfo = response.data[0].capitalInfo.latlng
+        respObj.capitalInfo = response.data[0].capitalInfo
         console.log(respObj, 'forward')
         res.json(respObj)
     } catch(e) {
