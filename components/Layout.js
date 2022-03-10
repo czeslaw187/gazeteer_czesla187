@@ -3,7 +3,7 @@ import Navbar from './NavBar.js'
 function Layout({children}) {
     return ( 
         <div>
-            <Navbar />
+            <Navbar key={'navbar'} />
             <div className='h-screen'>
                 {children}
             </div>

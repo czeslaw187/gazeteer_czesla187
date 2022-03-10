@@ -33,7 +33,7 @@ function Home(props) {
   return (
     <main>
       <div id="map" className="w-screen h-screen">
-        <MapWithNoSSR latLng={coordinates} coords={props}/>
+        <MapWithNoSSR key="mymap" latLng={coordinates} coords={props}/>
       </div>
     </main>
   );
