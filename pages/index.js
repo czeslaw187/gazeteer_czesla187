@@ -15,7 +15,7 @@ function Home({state, loadCountries, loadCoords, loadPoly, loadInfo}) {
       setCoordinates([position.coords.latitude,position.coords.longitude]) 
     })
     loadCountries()
-  },[loadCountries])
+  },[coordinates])
 
   useEffect(()=>{
     if (coordinates.length > 0) {
