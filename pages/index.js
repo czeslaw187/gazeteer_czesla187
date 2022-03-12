@@ -15,7 +15,7 @@ function Home(props) {
       setCoordinates([position.coords.latitude,position.coords.longitude]) 
     })
     props.loadCountries()
-  },[props.loadCountries])
+  },[props])
 
   useEffect(()=>{
     if (coordinates.length > 0) {
