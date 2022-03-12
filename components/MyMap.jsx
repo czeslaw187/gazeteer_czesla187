@@ -6,7 +6,8 @@ import "leaflet-defaulticon-compatibility";
 
 function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
-  let country = coords ? coords : 'Loading...'
+  let country = coords ? coords.state : 'Loading...'
+  console.log(country?.countryData.data?.latLng[0], 'map')
   return (
     <MapContainer
       center={country?.countryData.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
