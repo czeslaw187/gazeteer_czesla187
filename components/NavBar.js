@@ -2,15 +2,15 @@ import {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreator from '../lib/actions.js'
 
-function Navbar(props) {
-    let listOfCountries = props.state ? props.state.countires : 'loading...'
+function Navbar({state, loadPoly, loadInfo}) {
+    let listOfCountries = state ? state.countires : 'loading...'
     const [visible,setVisible] = useState(false)
-    const [currentCountry, setCurrentCountry] = useState(props.state?.mapData[0]?.data)
+    const [currentCountry, setCurrentCountry] = useState(state?.mapData[0]?.data)
 
     useEffect(()=>{
         if (currentCountry) {
-            props.loadPoly(currentCountry)
-            props.loadInfo(currentCountry)
+            loadPoly(currentCountry)
+            loadInfo(currentCountry)
         }
     },[currentCountry])
 
@@ -23,7 +23,7 @@ function Navbar(props) {
             <div className={visible ? "w-4/12 ml-auto my-auto max-h-52 animate-dropdown" : "w-4/12 ml-auto my-auto h-0"}>
                 <ul className="w-full flex flex-col text-right text-xl">
                     {
-                        props.state ? props.state.countries.map((el,id)=>{
+                        state ? state.countries.map((el,id)=>{
                             return <li key={id} className='mr-10 mb-2 hover:text-indigo-600'><button onClick={(e)=>{setCurrentCountry(e.target.innerHTML)}}>{el}</button></li>
                         }) : null
                     }
