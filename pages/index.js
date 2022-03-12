@@ -3,8 +3,7 @@ import dynamic from "next/dynamic";
 import {connect} from 'react-redux';
 import * as actionCreator from '../lib/actions.js';
 
-function Home(props) {  
-  const {state, loadCountries, loadCoords, loadPoly, loadInfo} = props
+function Home({state, loadCountries, loadCoords, loadPoly, loadInfo}) {  
   const [coordinates,setCoordinates] = useState([]) 
   const MapWithNoSSR = dynamic(() => import("../components/MyMap"), {
     ssr: false
