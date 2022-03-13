@@ -3,7 +3,6 @@ import axios from 'axios'
 export default async function forwardGeo(req, res) {
     const {countryName} = req.body
     try {
-        // let response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.NEXT_PUBLIC_LOCATIONIQ}&country=${countryName}&format=json`)
         let response = await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
         const respObj = {}
         respObj.name = response.data[0].name.common
@@ -13,7 +12,17 @@ export default async function forwardGeo(req, res) {
         respObj.population = response.data[0].population
         respObj.flag = response.data[0].flags.png
         respObj.capitalInfo = response.data[0].capitalInfo
-        console.log(respObj, 'forward')
+        const citiesData = await import('./citiesData.json')
+        let citiesOf = citiesData.features.filter(el=>{return el.properties.ADM0NAME == countryName})
+        citiesOf = citiesOf.map(el=>{
+            return {
+                name: el.properties.NAME,
+                latitude: el.properties.LATITUDE,
+                longitude: el.properties.LONGITUDE,
+                population: el.properties.GN_POP
+            }
+        })
+        respObj.majorCities = citiesOf
         res.json(respObj)
     } catch(e) {
         res.json({message: e.message})

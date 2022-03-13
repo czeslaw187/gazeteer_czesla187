@@ -1,5 +1,6 @@
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
-import {useState, useEffect} from 'react'
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from "react-leaflet";
+import L from 'leaflet'
+import {useState} from 'react'
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
@@ -7,9 +8,10 @@ import "leaflet-defaulticon-compatibility";
 function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
   let country = coords ? coords : 'Loading...'
+  console.log(country, 'map')
   return (
     <MapContainer
-      center={country?.countryData.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
+      center={country?.countryData?.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
       zoom={5}
       scrollWheelZoom={true}
       style={{ height: "100%", width: "100%" }}
@@ -19,16 +21,24 @@ function MyMap({latLng, coords}) {
         url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`}
         attribution='Map data &copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors, <a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/&quot;>CC-BY-SA</a>, Imagery &copy; <a href=&quot;https://www.mapbox.com/&quot;>Mapbox</a>'
       />    
-      {country ? <GeoJSON data={country.polygon.data}/> : null}
-      <Marker 
-      position={country?.countryData.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
-      draggable={true}
-      animate={true}
-      >
-        <Popup>
-          <p>{country?.mapData[0]?.data}</p>
-        </Popup>
-      </Marker>
+      {country ? <GeoJSON data={country.polygon?.data}/> : null}
+      {
+        country.countryData?.data?.majorCities.map((el,id)=>{
+          return (
+            <Marker
+              key={id}
+              position={[el.latitude,el.longitude]}
+              draggable={true}
+              animate={true}
+            >
+              <Popup>
+                <p className="text-lg">{el.name}</p>
+                <p>Population: {el.population}</p>
+              </Popup>
+            </Marker>
+          )
+        })
+      }
     </MapContainer>
   );
 };

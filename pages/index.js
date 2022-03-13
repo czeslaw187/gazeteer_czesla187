@@ -5,11 +5,8 @@ import * as actionCreator from '../lib/actions.js';
 
 function Home({state, loadCountries, loadCoords, loadPoly, loadInfo}) {  
   const [coordinates,setCoordinates] = useState([]) 
-  const MapWithNoSSR = dynamic(() => import("../components/MyMap"), {
-    ssr: false
-  });
+  
   let storeData = state ? state.mapData : false
-
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(position=>{
       setCoordinates([position.coords.latitude,position.coords.longitude]) 
@@ -23,13 +20,17 @@ function Home({state, loadCountries, loadCoords, loadPoly, loadInfo}) {
     }
   },[coordinates])
 
-  useEffect(()=>{
+  useEffect(async ()=>{
     if (storeData) {
-      loadPoly(storeData[0].data)
-      loadInfo(storeData[0].data)
+      await loadPoly(storeData[0].data)
+      await loadInfo(storeData[0].data)
     }
   },[storeData[0]])
   
+  const MapWithNoSSR = dynamic(() => import("../components/MyMap"), {
+    ssr: false
+  });
+
   return (
     <main>
       <div id="map" className="w-screen h-screen">
