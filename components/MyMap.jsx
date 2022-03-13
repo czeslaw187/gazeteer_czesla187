@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from "react-leaflet";
-import L from 'leaflet'
+import * as L from 'leaflet'
 import {useState} from 'react'
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
@@ -9,6 +9,19 @@ function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
   let country = coords ? coords : 'Loading...'
   console.log(country, 'map')
+
+  const LeafIcon = L.Icon.extend({
+    options: {}
+  });
+  const blueIcon = new LeafIcon({
+    iconUrl:
+      "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|abcdef&chf=a,s,ee00FFFF"
+  })
+  const greenIcon = new LeafIcon({
+    iconUrl:
+      "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF"
+  });
+
   return (
     <MapContainer
       center={country?.countryData?.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
@@ -30,6 +43,7 @@ function MyMap({latLng, coords}) {
               position={[el.latitude,el.longitude]}
               draggable={true}
               animate={true}
+              icon={country.countryData.data.capital == el.name ? greenIcon : blueIcon}
             >
               <Popup>
                 <p className="text-lg">{el.name}</p>

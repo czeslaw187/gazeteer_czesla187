@@ -11,7 +11,7 @@ export default async function forwardGeo(req, res) {
         respObj.latLng = response.data[0].latlng
         respObj.population = response.data[0].population
         respObj.flag = response.data[0].flags.png
-        respObj.capitalInfo = response.data[0].capitalInfo
+        respObj.capital = response.data[0].capital[0]
         const citiesData = await import('./citiesData.json')
         let citiesOf = citiesData.features.filter(el=>{return el.properties.ADM0NAME == countryName})
         citiesOf = citiesOf.map(el=>{
