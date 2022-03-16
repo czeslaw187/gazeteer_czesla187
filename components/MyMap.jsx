@@ -8,6 +8,9 @@ import "leaflet-defaulticon-compatibility";
 function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
   let country = coords ? coords : 'Loading...'
+  if (!country) {
+    return <div>Loading...</div>
+  }
   console.log(country, 'map')
 
   const LeafIcon = L.Icon.extend({
@@ -21,11 +24,17 @@ function MyMap({latLng, coords}) {
     iconUrl:
       "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF"
   });
-
+  let bbox = country.countryData?.data?.bbox
+  let center = country.countryData?.data?.capitalInfo
+  if (bbox) {
+    bbox = bbox.map(el=>parseInt(el))
+    bbox = [[bbox[0],bbox[2]],[bbox[1],bbox[3]]]
+  }
+  console.log(bbox, 'map')
   return (
     <MapContainer
-      center={country?.countryData?.data ? [country?.countryData.data?.latLng[0],country?.countryData.data?.latLng[1]] : [30,20]}
-      zoom={5}
+      bounds={bbox}      
+      center={center}
       scrollWheelZoom={true}
       style={{ height: "100%", width: "100%" }}
       whenCreated={map=>setMymap(map)}
