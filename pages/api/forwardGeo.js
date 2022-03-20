@@ -5,7 +5,6 @@ export default async function forwardGeo(req, res) {
     try {
         let bbox = await axios.get(`https://eu1.locationiq.com/v1/search.php?key=${process.env.NEXT_PUBLIC_LOCATIONIQ}&q=${countryName}&format=json`)
         let response = await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
-        console.log(response.data[0])
         const respObj = {}
         respObj.name = response.data[0].name.common
         respObj.currency = response.data[0].currencies

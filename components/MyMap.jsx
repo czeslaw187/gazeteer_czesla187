@@ -36,6 +36,7 @@ function MyMap({latLng, coords}) {
       bounds={bbox}      
       center={center}
       scrollWheelZoom={true}
+      zoomControl={false}
       style={{ height: "100%", width: "100%" }}
       whenCreated={map=>setMymap(map)}
     >
