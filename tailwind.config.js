@@ -7,13 +7,18 @@ module.exports = {
        theme: {
          extend: {
            keyframes: {
+             slideLeft: {
+               '0%': {width: '0'},
+               '100%': {width: '5rem'}
+             },
              dropdown: {
                '0%': {height: '0'},
                '100%': {height: '7rem'}
              }
            },
            animation: {
-             dropdown: 'dropdown 0.5s ease-in'
+             dropdown: 'dropdown 0.5s ease-in',
+             slideLeft: 'slideLeft 0.5s ease-in'
            }
          },
        },

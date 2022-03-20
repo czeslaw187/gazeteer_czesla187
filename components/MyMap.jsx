@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, LayersControl } from "react-leaflet";
 import * as L from 'leaflet'
 import {useState} from 'react'
 import "leaflet/dist/leaflet.css";
@@ -7,6 +7,7 @@ import "leaflet-defaulticon-compatibility";
 
 function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
+  const [sideMenu,setSideMenu] = useState(false)
   let country = coords ? coords : 'Loading...'
   if (!country) {
     return <div>Loading...</div>
@@ -63,6 +64,11 @@ function MyMap({latLng, coords}) {
           )
         })
       }
+      <LayersControl.Overlay>
+        <div className="w-4/12 absolute top-20 z-[9999]">
+          <button className="border-gray-900 border-2 rounded-md w-1/12 py-2 font-bold text-lg ml-3 bg-white" onClick={()=>{setSideMenu(!sideMenu)}}>{sideMenu ? "<<" : ">>"}</button>
+        </div>
+      </LayersControl.Overlay>
     </MapContainer>
   );
 };
