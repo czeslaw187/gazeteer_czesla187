@@ -65,8 +65,8 @@ function MyMap({latLng, coords}) {
         })
       }
       <LayersControl.Overlay>
-        <div className="w-4/12 absolute top-20 z-[9999]">
-          <button className="border-gray-900 border-2 rounded-md w-1/12 py-2 font-bold text-lg ml-3 bg-white" onClick={()=>{setSideMenu(!sideMenu)}}>{sideMenu ? "<<" : ">>"}</button>
+        <div className="w-full absolute top-20 z-[9999]">
+          <button className="border-gray-900 border-2 rounded-md p-3 font-bold text-lg text-left ml-3 bg-white" onClick={()=>{setSideMenu(!sideMenu)}}>{sideMenu ? "<<" : ">>"}</button>
         </div>
       </LayersControl.Overlay>
     </MapContainer>

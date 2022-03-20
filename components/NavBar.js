@@ -26,7 +26,7 @@ function Navbar(props) {
                         props.state ? props.state.countries.map((el,id)=>{
                             return (
                                 <>
-                                    <li key={id} className='mr-10 mb-2 hover:text-indigo-600'>
+                                    <li key={id} className='text-justify mb-2 hover:text-indigo-600'>
                                         <button onClick={(e)=>{setCurrentCountry(e.target.innerHTML)}}>{el}</button>
                                     </li>
                                     <hr/>
