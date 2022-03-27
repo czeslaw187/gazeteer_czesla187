@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .transition-slider {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    transition-duration: 500ms;
+  }
+}
+
 html,
 body {
   padding: 0;

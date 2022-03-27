@@ -65,18 +65,18 @@ function MyMap({latLng, coords}) {
         })
       }
       <LayersControl.Overlay>
-        <div className="w-full h-full m-1 relative top-14 flex flex-row">
-          <div className={sideMenu ? "w-full md:w-4/12 h-full bg-gray-100 z-[9999] border-2 border-gray-800 rounded-sm px-1 animate-slideOpen overflow-x-auto" : "animate-slideClose w-1/12 h-full"}>
-            <button className="w-[15] h-auto text-lg py-3 pl-3 font-bold relative float-right underline text-blue-600" onClick={()=>{setSideMenu(!sideMenu)}} >{"<<"}</button>       
-            <h1 className="text-2xl mt-7 mb-5 text-center">{country.countryData?.data?.name}</h1>
-            <hr/>
-            <img src={country.countryData?.data?.flag} alt="flag" className="mx-auto border-2 border-gray-900" /> 
-            <hr/>
-            <p className="text-lg font-bold mx-6 my-5">Capital: {country.countryData?.data?.capital}</p>  
-            <hr/>
-            <p className="text-lg font-bold mx-6 my-5">Population: {country.countryData?.data?.population}</p>  
-            <hr/>
-          </div>
+        <div className={sideMenu == true ? 
+                        "max-w-full md:max-w-xl transition-slider relative top-14 h-full bg-sky-200 z-[9999] border-2 border-gray-800 rounded-sm px-1 overflow-x-auto" : 
+                        "max-w-0 transition-slider absolute h-full top-14 z-[9999] border-2 border-gray-800 rounded-sm px-0 overflow-x-auto"}>
+          <button className="w-[15] h-auto text-lg py-3 pl-3 font-bold relative float-right underline text-blue-600" onClick={()=>{setSideMenu(!sideMenu)}} >{"<<"}</button>       
+          <h1 className="text-2xl mt-7 mb-5 text-center">{country.countryData?.data?.name}</h1>
+          <hr/>
+          <img src={country.countryData?.data?.flag} alt="flag" className="mr-auto ml-5 border-2 border-gray-900 w-6/12 h-auto" /> 
+          <hr/>
+          <p className="text-lg font-bold mx-6 my-5">Capital: {country.countryData?.data?.capital}</p>  
+          <hr/>
+          <p className="text-lg font-bold mx-6 my-5">Population: {country.countryData?.data?.population}</p>  
+          <hr/>
         </div>
         <button className="border-gray-900 border-2 z-[9998] rounded-md p-3 h-[20] absolute top-20 left-2 font-bold text-lg text-left bg-white" onClick={()=>{setSideMenu(!sideMenu)}}>{">>"}</button>
       </LayersControl.Overlay>

@@ -20,7 +20,7 @@ function Navbar(props) {
                 <a href="#" className="font-mono text-blue-800 text-3xl my-3">MyMap</a>                
                 <button className='w-4/12 md:w-1/12 h-10 my-3 mr-0 right-4 fixed border-2 border-slate-800 rounded-md p-1 hover:bg-green-600' onClick={()=>{setVisible(!visible)}}>Menu</button>
             </div>   
-            <div className={visible ? "w-4/12 ml-auto my-auto h-52 animate-dropdown overflow-auto" : "hidden"}>
+            <div className={visible ? "w-4/12 ml-auto my-auto max-h-72 transition-slider overflow-auto" : "w-4/12 ml-auto my-auto max-h-0 transition-slider overflow-auto"}>
                 <ul className="flex flex-col text-right text-xl z-[10000]">
                     {
                         props.state ? props.state.countries.map((el,id)=>{
