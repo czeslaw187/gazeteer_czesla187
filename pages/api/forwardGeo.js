@@ -28,6 +28,8 @@ export default async function forwardGeo(req, res) {
         respObj.majorCities = citiesOf
         res.json(respObj)
     } catch(e) {
-        res.json({message: e.message})
+        let respObj = {}
+        respObj.error = "No content"
+        res.json(respObj)
     }
 }

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import {connect} from 'react-redux';
 import * as actionCreator from '../lib/actions.js';
 
-function Home({state, loadCountries, loadCoords, loadPoly, loadInfo}) {  
+function Home({state, loadCountries, loadCoords, loadPoly, loadInfo, loadWiki}) {  
   const [coordinates,setCoordinates] = useState([]) 
   
   let storeData = state ? state.mapData : false
@@ -19,13 +19,19 @@ function Home({state, loadCountries, loadCoords, loadPoly, loadInfo}) {
       loadCoords(coordinates)
     }
   },[coordinates])
-
+  console.log(state?.countryData.data?.name, 'countryName')
   useEffect(async ()=>{
     if (storeData) {
       await loadPoly(storeData[0].data)
       await loadInfo(storeData[0].data)
     }
   },[storeData[0]])
+
+  useEffect(()=>{
+    if (state?.countryData) {
+      loadWiki(state.countryData.data?.name)
+    }
+  },[state?.countryData.data?.name])
   
   const MapWithNoSSR = dynamic(() => import("../components/MyMap"), {
     ssr: false
@@ -51,7 +57,8 @@ function mapDispatchToProps(dispatch) {
     loadCoords: (coords)=>{dispatch(actionCreator.loadGeoJson(coords))},
     loadPoly: (country)=>{dispatch(actionCreator.getBorders(country))},
     loadCountries: ()=>{dispatch(actionCreator.getCountries())},
-    loadInfo: (country)=>{dispatch(actionCreator.getInfo(country))}
+    loadInfo: (country)=>{dispatch(actionCreator.getInfo(country))},
+    loadWiki: (country)=>{dispatch(actionCreator.getWikiContent(country))}
   }
 }
 
