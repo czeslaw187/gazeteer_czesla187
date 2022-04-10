@@ -4,10 +4,12 @@ import {useState} from 'react'
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
+import Weather from '../components/Weather.js'
 
 function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
   const [sideMenu,setSideMenu] = useState(false)
+  const [weather,setWeather] = useState(false)
   let country = coords ? coords : 'Loading...'
   if (!country) {
     return <div>Loading...</div>
@@ -76,10 +78,16 @@ function MyMap({latLng, coords}) {
           <hr/>
           <p className="text-lg font-bold mx-6 my-5">Population: {country.countryData?.data?.population}</p>  
           <hr/>
-          <div dangerouslySetInnerHTML={{__html: country.wikipedia?.data?.content}} /><a href={country.wikipedia?.data?.wikiUrl}>more...</a>
+          <div dangerouslySetInnerHTML={{__html: country.wikipedia?.data?.content}} /><a href={country.wikipedia?.data?.wikiUrl}>{country.wikipedia?.data?.content ? 'more...' : 'No content'}</a>
         </div>
-        <button className="border-gray-900 border-2 z-[9998] rounded-md p-3 h-[20] absolute top-20 left-2 font-bold text-lg text-left bg-white" onClick={()=>{setSideMenu(!sideMenu)}}>{">>"}</button>
-      </LayersControl.Overlay>
+        <div>
+          <button className="border-gray-900 border-2 z-[9998] rounded-md p-3 h-14 absolute top-20 left-2 font-bold text-lg text-left bg-white" onClick={()=>{setSideMenu(!sideMenu)}}>{">>"}</button>
+          <button className="absolute top-40 border-gray-900 rounded-md border-2 p-2 h-14 z-[9998] left-2 bg-white" onClick={()=>{setWeather(!weather)}}>
+            <img className="w-auto max-h-8" src='freesun.jpg' alt="forecast" />
+          </button>          
+        </div>
+        <Weather weather={weather} setWeather={setWeather} />
+        </LayersControl.Overlay>
     </MapContainer>
   );
 };

@@ -10,7 +10,7 @@ export default async function getWiki(req, res) {
                 wikipedia.content = wikipedia[key].extract
                 wikipedia.wikiUrl = wikipedia[key].fullurl
             } else {
-                wikipedia = ["No content"]
+                wikipedia.content = ["No content"]
             }
         }
         res.json(wikipedia)
