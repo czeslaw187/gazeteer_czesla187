@@ -74,7 +74,7 @@ function MyMap({latLng, coords}) {
             <img className="w-auto max-h-8" src='freesun.jpg' alt="forecast" />
           </button>          
         </div>
-        <Weather weather={weather} setWeather={setWeather} />
+        <Weather country={country} weather={weather} setWeather={setWeather} />
         </LayersControl.Overlay>
     </MapContainer>
   );
