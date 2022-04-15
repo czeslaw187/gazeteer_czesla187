@@ -4,10 +4,8 @@ export default async function geoJson(req, res) {
     if (req.body) {
         const {mapData} = req.body
         try {
-            const result = await axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${mapData[0]}&longitude=${mapData[1]}&localityLanguage=en`, {
-                headers: ['Access-Control-Allow-Origin: *', 'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token']
-            })
-            res.json(result.data.countryName)
+            const result = await axios.get(`http://eu1.locationiq.com/v1/reverse.php?key=${process.env.NEXT_PUBLIC_LOCATIONIQ}&lat=${mapData[0]}&lon=${mapData[1]}&format=json`)
+            res.json(result.data.address.country)
         } catch(e) {
             res.json({message: e.message})
         }
