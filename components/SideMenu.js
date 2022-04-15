@@ -9,14 +9,14 @@ function SideMenu({country, sideMenu, setSideMenu}) {
             <h1 className="text-2xl mt-7 mb-5 text-center">{country.countryData?.data?.name}</h1>
             <hr/>
             <div className="mx-auto w-full text-center">
-                {country.countryData?.data?.flag ? <Image src={country.countryData?.data?.flag} width={300} height={150}/> : null}
+                {country.countryData?.data?.flag ? <Image src={country.countryData?.data?.flag} alt={country.countryData?.data?.name} width={300} height={150}/> : null}
             </div>
             <hr/>
             <p className="text-lg font-bold mx-6 my-5">Capital: {country.countryData?.data?.capital}</p>  
             <hr/>
             <p className="text-lg font-bold mx-6 my-5">Population: {country.countryData?.data?.population}</p>  
             <hr/>
-            <div dangerouslySetInnerHTML={{__html: country.countryData?.data?.wikipedia.content}} /><a href={country.countryData?.data?.wikipedia.wikiUrl} target="_blank">{country.countryData?.data?.wikipedia.content ? 'more...' : 'No content'}</a>
+            <div dangerouslySetInnerHTML={{__html: country.countryData?.data?.wikipedia.content}} /><a href={country.countryData?.data?.wikipedia.wikiUrl} target="_blank" rel="noreferrer">{country.countryData?.data?.wikipedia.content ? 'more...' : 'No content'}</a>
         </div>
      );
 }

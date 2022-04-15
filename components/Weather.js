@@ -12,9 +12,9 @@ function Weather({weather, setWeather, country}) {
             <h2 className={weather ? "w-full text-center relative z-[9998] text-xl mb-3" : "invisible"}>Today</h2>
             <div className="flex flex-row overflow-x-auto h-3/6">
                 {
-                    todayForecast ? todayForecast.map(el=>{
+                    todayForecast ? todayForecast.map((el,id)=>{
                         return (
-                            <div className="w-3/12 h-3/6 border-gray-100 border-x-2">
+                            <div key={id} className="w-3/12 h-3/6 border-gray-100 border-x-2">
                                 <p className="text-center">{el.date}</p>
                                 <Image src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`} alt={el.description} width={100} height={80}/>
                                 <p className="text-center">{el.description}</p>
