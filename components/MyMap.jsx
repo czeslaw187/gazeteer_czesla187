@@ -6,6 +6,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import Weather from './Weather.js'
 import SideMenu from "./SideMenu.js";
+import Image from "next/image";
 
 function MyMap({latLng, coords}) {
   const [mymap,setMymap] = useState(null)
@@ -71,11 +72,11 @@ function MyMap({latLng, coords}) {
         <div>
           <button className="border-gray-900 border-2 z-[9998] rounded-md p-3 h-14 absolute top-20 left-2 font-bold text-lg text-left bg-white" onClick={()=>{setSideMenu(!sideMenu)}}>{">>"}</button>
           <button className="absolute top-40 border-gray-900 rounded-md border-2 p-2 h-14 z-[9998] left-2 bg-white" onClick={()=>{setWeather(!weather)}}>
-            <img className="w-auto max-h-8" src='freesun.jpg' alt="forecast" />
+            <Image src='/freesun.jpg' alt="forecast" width={30} height={30}/>
           </button>          
         </div>
         <Weather country={country} weather={weather} setWeather={setWeather} />
-        </LayersControl.Overlay>
+      </LayersControl.Overlay>
     </MapContainer>
   );
 };

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function Weather({weather, setWeather, country}) {
     let todayForecast = country?.countryData?.data?.forecast
     todayForecast = todayForecast && todayForecast.length > 0 ? todayForecast.slice(0,8) : null
@@ -14,7 +16,7 @@ function Weather({weather, setWeather, country}) {
                         return (
                             <div className="w-3/12 h-3/6 border-gray-100 border-x-2">
                                 <p className="text-center">{el.date}</p>
-                                <img src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`} alt={el.description} />
+                                <Image src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`} alt={el.description} width={100} height={80}/>
                                 <p className="text-center">{el.description}</p>
                                 <p className="text-center">Temperature {el.temp}<sup>o</sup>C</p>                        
                                 <p className="text-center">Feels like {el.feels}<sup>o</sup>C</p>           
