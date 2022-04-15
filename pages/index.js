@@ -5,7 +5,8 @@ import * as actionCreator from '../lib/actions.js';
 
 function Home({state, loadCountries, loadCoords, loadInfo}) {  
   const [coordinates,setCoordinates] = useState([]) 
-  
+  const [loading,setLoading] = useState(false)
+
   let storeData = state ? state.mapData : false
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(position=>{
@@ -22,14 +23,16 @@ function Home({state, loadCountries, loadCoords, loadInfo}) {
 
   useEffect(()=>{
     if (storeData) {
+      setLoading(false)
       loadInfo(storeData[0].data)
+      setLoading(true)
     }
   },[storeData[0]])
-  
+
   const MapWithNoSSR = dynamic(() => import("../components/MyMap"), {
     ssr: false
   });
-
+  if (!loading) return <div className="text-xl text-center w-full bg-white relative top-40 z-[10000]">Loading ...</div>
   return (
     <main>
       <div id="map" className="w-screen h-screen">
