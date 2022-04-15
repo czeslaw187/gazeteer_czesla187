@@ -64,7 +64,7 @@ export default async function forwardGeo(req, res) {
         res.json(respObj)
     } catch(e) {
         let respObj = {}
-        respObj.error = "No content"
+        respObj.error = e.message
         res.json(respObj)
     }
 }
