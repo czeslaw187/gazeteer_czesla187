@@ -12,7 +12,6 @@ function Home({state, loadCountries, loadCoords, loadInfo}) {
     navigator.geolocation.getCurrentPosition(position=>{
       setCoordinates([position.coords.latitude,position.coords.longitude]) 
     })
-    loadCountries()
   },[])
 
   useEffect(()=>{
@@ -51,7 +50,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     loadCoords: (coords)=>{dispatch(actionCreator.loadGeoJson(coords))},
-    loadCountries: ()=>{dispatch(actionCreator.getCountries())},
     loadInfo: (country)=>{dispatch(actionCreator.getInfo(country))},
   }
 }

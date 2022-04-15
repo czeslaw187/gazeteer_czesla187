@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import * as actionCreator from '../lib/actions.js'
+import countriesList from '../pages/api/countriesPoly.json'
 
 function Navbar(props) {
-    let listOfCountries = props.state ? props.state.countires : 'loading...'
+    let listOfCountries = countriesList.features.map(el=>{
+        return el.properties.admin
+    })
     const [visible,setVisible] = useState(false)
     const [currentCountry, setCurrentCountry] = useState(props.state?.mapData[0]?.data)
 
@@ -22,16 +25,16 @@ function Navbar(props) {
             <div className={visible ? "w-4/12 ml-auto my-auto max-h-72 transition-slider overflow-auto" : "w-4/12 ml-auto my-auto max-h-0 transition-slider overflow-auto"}>
                 <ul className="flex flex-col text-right text-xl z-[10000]">
                     {
-                        props.state ? props.state.countries.map((el,id)=>{
+                        listOfCountries.map((el,id)=>{
                             return (
                                 <>
                                     <li key={id} className='text-justify mb-2 hover:text-indigo-600'>
-                                        <button key={id} onClick={(e)=>{setCurrentCountry(e.target.innerHTML)}}>{el}</button>
+                                        <button key={id} onClick={(e)=>{setCurrentCountry(e.target.innerHTML); setVisible(!visible)}}>{el}</button>
                                     </li>
                                     <hr/>
                                 </>
                             )
-                        }) : null
+                        })
                     }
                 </ul>
             </div>         
