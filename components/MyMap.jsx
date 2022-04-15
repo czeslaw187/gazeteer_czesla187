@@ -47,7 +47,7 @@ function MyMap({latLng, coords}) {
         url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`}
         attribution='Map data &copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors, <a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/&quot;>CC-BY-SA</a>, Imagery &copy; <a href=&quot;https://www.mapbox.com/&quot;>Mapbox</a>'
       />    
-      {country ? <GeoJSON data={country.polygon?.data}/> : null}
+      {country ? <GeoJSON data={country.countryData?.data?.polygon}/> : null}
       {
         country.countryData?.data?.majorCities ? country.countryData?.data?.majorCities.map((el,id)=>{
           return (

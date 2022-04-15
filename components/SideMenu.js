@@ -12,7 +12,7 @@ function SideMenu({country, sideMenu, setSideMenu}) {
             <hr/>
             <p className="text-lg font-bold mx-6 my-5">Population: {country.countryData?.data?.population}</p>  
             <hr/>
-            <div dangerouslySetInnerHTML={{__html: country.wikipedia?.data?.content}} /><a href={country.wikipedia?.data?.wikiUrl} target="_blank">{country.wikipedia?.data?.content ? 'more...' : 'No content'}</a>
+            <div dangerouslySetInnerHTML={{__html: country.countryData?.data?.wikipedia.content}} /><a href={country.countryData?.data?.wikipedia.wikiUrl} target="_blank">{country.countryData?.data?.wikipedia.content ? 'more...' : 'No content'}</a>
         </div>
      );
 }

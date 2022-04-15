@@ -1,5 +1,5 @@
 function Weather({weather, setWeather, country}) {
-    let todayForecast = country?.weather?.data
+    let todayForecast = country?.countryData?.data?.forecast
     todayForecast = todayForecast && todayForecast.length > 0 ? todayForecast.slice(0,8) : null
     return ( 
         <div className={ weather ?

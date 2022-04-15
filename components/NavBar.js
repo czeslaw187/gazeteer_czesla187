@@ -9,7 +9,6 @@ function Navbar(props) {
 
     useEffect(()=>{
         if (currentCountry) {
-            props.loadPoly(currentCountry)
             props.loadInfo(currentCountry)
         }
     },[currentCountry])
