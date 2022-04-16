@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import {connect} from 'react-redux';
 import * as actionCreator from '../lib/actions.js';
 
-function Home({state, loadCountries, loadCoords, loadInfo}) {  
+function Home({state, loadCoords, loadInfo}) {  
   const [coordinates,setCoordinates] = useState([]) 
   const [loading,setLoading] = useState(false)
 

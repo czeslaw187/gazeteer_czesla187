@@ -50,7 +50,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        loadPoly: (country)=>{dispatch(actionCreator.getBorders(country))},
         loadInfo: (country)=>{dispatch(actionCreator.getInfo(country))}
     }
 }
