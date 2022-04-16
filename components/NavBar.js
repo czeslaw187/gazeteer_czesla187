@@ -29,7 +29,7 @@ function Navbar(props) {
                             return (
                                 <>
                                     <li key={id} className='text-justify mb-2 hover:text-indigo-600'>
-                                        <button key={id} onClick={(e)=>{setCurrentCountry(e.target.innerHTML); setVisible(!visible)}}>{el}</button>
+                                        <button onClick={(e)=>{setCurrentCountry(e.target.innerHTML); setVisible(!visible)}}>{el}</button>
                                     </li>
                                     <hr/>
                                 </>
